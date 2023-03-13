@@ -5,25 +5,42 @@ on:
     branches:
       - develop
     paths:
-      - "**.go"
+      - "**.cs"
+      - ".editorconfig"
   pull_request:
     branches:
       - develop
     paths:
-      - "**.go"
+      - "**.cs"
+      - ".editorconfig"
 
 jobs:
-  build:
+  check-format:
     runs-on: windows-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: '1.17'
 
-      - name: Get dependencies
-        run: go mod download
+    steps:      
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+      
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      
+      - name: Setup NuGet.exe
+        uses: nuget/setup-nuget@v1
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: NuGet restore
+        run: nuget restore Hospital.sln
+        
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run dotnet format
+        run: dotnet format --verify-no-changes --no-restore --verbosity diagnostic
+      
+      - name: Build
+        run: dotnet build --no-restore
