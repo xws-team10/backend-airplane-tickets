@@ -1,6 +1,13 @@
+using FlyMateLibrary.Core.Model;
+using FlyMateLibrary.Core.Serivce;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<FlightsStoreDatabaseSettings>(
+    builder.Configuration.GetSection("FlightsStoreDatabase"));
+
+builder.Services.AddSingleton<FlightsService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
