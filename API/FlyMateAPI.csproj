@@ -15,7 +15,6 @@
   <ItemGroup>
     <Folder Include="Core\Connections\" />
     <Folder Include="Core\DTO\" />
-    <Folder Include="Core\Repository\" />
     <Folder Include="Dto\" />
   </ItemGroup>
 
