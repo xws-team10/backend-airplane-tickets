@@ -31,3 +31,16 @@ C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\obj\Debug\ne
 C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\obj\Debug\net7.0\FlyMateAPI.pdb
 C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\obj\Debug\net7.0\FlyMateAPI.genruntimeconfig.cache
 C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\obj\Debug\net7.0\ref\FlyMateAPI.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\AWSSDK.Core.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\AWSSDK.SecurityToken.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\DnsClient.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\MongoDB.Bson.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\MongoDB.Driver.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\MongoDB.Driver.Core.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\MongoDB.Libmongocrypt.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\SharpCompress.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\Snappier.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\ZstdSharp.dll
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\runtimes\linux\native\libmongocrypt.so
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\API\bin\Debug\net7.0\runtimes\win\native\mongocrypt.dll

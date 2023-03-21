@@ -1,5 +1,5 @@
-using FlyMateLibrary.Core.Model;
-using FlyMateLibrary.Core.Serivce;
+using FlyMateAPI.Core.Model;
+using FlyMateAPI.Core.Serivce;
 
 var builder = WebApplication.CreateBuilder(args);
 
