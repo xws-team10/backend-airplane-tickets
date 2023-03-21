@@ -1,4 +1,4 @@
-﻿using FlyMateAPI.Core.Serivce;
+﻿using FlyMateAPI.Core.Service;
 using FlyMateAPI.Core.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,12 +15,12 @@ namespace FlyMateAPI.Controllers
 
         [HttpGet]
         public async Task<List<Flight>> Get() =>
-            await _flightsService.GetAsync();
+            await _flightsService.GetAllAsync();
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Flight>> Get(string id)
         {
-            var flight = await _flightsService.GetAsync(id);
+            var flight = await _flightsService.GetByIdAsync(id);
 
             if (flight is null)
             {
@@ -41,7 +41,7 @@ namespace FlyMateAPI.Controllers
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, Flight updateFlight)
         {
-            var flight = await _flightsService.GetAsync(id);
+            var flight = await _flightsService.GetByIdAsync(id);
 
             if (flight is null)
             {
@@ -58,14 +58,14 @@ namespace FlyMateAPI.Controllers
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var flight = await _flightsService.GetAsync(id);
+            var flight = await _flightsService.GetByIdAsync(id);
 
             if (flight is null)
             {
                 return NotFound();
             }
 
-            await _flightsService.RemoveAsync(id);
+            await _flightsService.DeleteAsync(id);
 
             return NoContent();
         }

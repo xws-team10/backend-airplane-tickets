@@ -1,40 +1,30 @@
 ﻿using FlyMateAPI.Core.Model;
-using MongoDB.Driver;
-using Microsoft.Extensions.Options;
+using FlyMateAPI.Core.Repository;
 
-namespace FlyMateAPI.Core.Serivce
+namespace FlyMateAPI.Core.Service
 {
-
     public class FlightsService
     {
-        private readonly IMongoCollection<Flight> _flightsCollection;
+        private readonly FlightsRepository _repository;
 
-        public FlightsService(
-            IOptions<FlightsStoreDatabaseSettings> flightsStoreDatabaseSettings)
+        public FlightsService(FlightsRepository repository)
         {
-            var mongoClient = new MongoClient(
-                flightsStoreDatabaseSettings.Value.ConnectionString);
-
-            var mongoDatabase = mongoClient.GetDatabase(
-                flightsStoreDatabaseSettings.Value.DatabaseName);
-
-            _flightsCollection = mongoDatabase.GetCollection<Flight>(
-                flightsStoreDatabaseSettings.Value.FlightsCollectionName);
+            _repository = repository;
         }
 
-        public async Task<List<Flight>> GetAsync() =>
-            await _flightsCollection.Find(_ => true).ToListAsync();
+        public async Task<List<Flight>> GetAllAsync() =>
+            await _repository.GetAllAsync();
 
-        public async Task<Flight?> GetAsync(string id) =>
-            await _flightsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        public async Task<Flight?> GetByIdAsync(string id) =>
+            await _repository.GetByIdAsync(id);
 
         public async Task CreateAsync(Flight newFlight) =>
-            await _flightsCollection.InsertOneAsync(newFlight);
+            await _repository.CreateAsync(newFlight);
 
         public async Task UpdateAsync(string id, Flight updateFlight) =>
-            await _flightsCollection.ReplaceOneAsync(x => x.Id == id, updateFlight);
+            await _repository.UpdateAsync(id, updateFlight);
 
-        public async Task RemoveAsync(string id) =>
-            await _flightsCollection.DeleteOneAsync(x => x.Id == id);
+        public async Task DeleteAsync(string id) =>
+            await _repository.DeleteAsync(id);
     }
 }
