@@ -1,10 +1,11 @@
 ﻿using FlyMateAPI.Core.Model;
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
+using FlyMateAPI.Core.Repository.Core;
 
 namespace FlyMateAPI.Core.Repository
 {
-    public class FlightsRepository
+    public class FlightsRepository : IFlightsRepository
     {
         private readonly IMongoCollection<Flight> _flightsCollection;
 

@@ -1,9 +1,10 @@
 ﻿using FlyMateAPI.Core.Model;
 using FlyMateAPI.Core.Repository;
+using FlyMateAPI.Core.Service.Core;
 
 namespace FlyMateAPI.Core.Service
 {
-    public class FlightsService
+    public class FlightsService : IFlightsService
     {
         private readonly FlightsRepository _repository;
 
