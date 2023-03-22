@@ -1,5 +1,0 @@
-C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\FlyMateLibrary\obj\Debug\net7.0\FlyMateLibrary.csproj.AssemblyReference.cache
-C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\FlyMateLibrary\obj\Debug\net7.0\FlyMateLibrary.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\FlyMateLibrary\obj\Debug\net7.0\FlyMateLibrary.AssemblyInfoInputs.cache
-C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\FlyMateLibrary\obj\Debug\net7.0\FlyMateLibrary.AssemblyInfo.cs
-C:\Users\Uros\Desktop\XML\XML-Projekat\backend-airplane-tickets\FlyMateLibrary\obj\Debug\net7.0\FlyMateLibrary.csproj.CoreCompileInputs.cache
