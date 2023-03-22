@@ -3,19 +3,17 @@ using MongoDB.Bson;
 
 namespace FlyMateAPI.Core.Model
 {
-    public class Flight
+    public class Flight : Entity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
 
-        [BsonElement("Name")]
-        public string Name { get; set; } = null!;
-
-        public decimal Price { get; set; }
-
-        public string Capacity { get; set; } = null!;
-
-        public string Company { get; set; } = null!;
+        [BsonElement("Airline")]
+        public string Airline { get; set; } = null!;
+        public string From { get; set; } = null!;
+        public string To { get; set; } = null!;
+        public DateTime DepartureDateTime { get; set; }
+        public DateTime ArrivalDateTime { get; set; }
+        public int Capacity { get; set; }
+        public int Price { get; set; }
+        public int SeatsLeft { get; set; }
     }
 }
