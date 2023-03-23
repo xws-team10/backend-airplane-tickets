@@ -37,10 +37,10 @@ namespace FlyMateAPI.Core.Service
             foreach (Flight flight in await GetAllAsync())
             {
                 if (flight.SeatsLeft >= capacity)
-                if(DateTime.Compare(flight.DepartureDateTime.Date, date.Date) == 0)
+                if(DateTime.Compare(flight.DepartureDateTime.Date, date.Date) == 0 || date.Date.Equals(DateTime.MinValue))
                 if((flight.From.ToLower()).StartsWith(from.ToLower()) || from == "")
                 if((flight.To.ToLower()).StartsWith(to.ToLower()) || to == "")
-                        FlightsBySearch.Add(flight);
+                    FlightsBySearch.Add(flight);
             }
             return FlightsBySearch;
         }
