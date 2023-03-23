@@ -7,4 +7,6 @@ public class FlightsStoreDatabaseSettings
     public string DatabaseName { get; set; } = null!;
 
     public string FlightsCollectionName { get; set; } = null!;
+
+    public string BasketCollectionName { get; set; } = null!;
 }
