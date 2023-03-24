@@ -69,5 +69,20 @@ namespace FlyMateAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("/getBySearch")]
+        public async Task<ActionResult<List<Flight>>> GetBySearch(DateTime date, int capacity = 0, string from = "", string to = "")
+        {
+            var flight = await _flightsService.GetBySearch(capacity, date, from, to);
+
+            if (flight is null)
+            {
+                return NotFound();
+            }
+
+            return flight;
+
+        }
+
     }
 }
