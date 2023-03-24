@@ -9,7 +9,7 @@ namespace FlyMateAPI.Core.Service.Core
         Task CreateAsync(Flight newFlight);
         Task UpdateAsync(string id, Flight updateFlight);
         Task DeleteAsync(string id);
-        Task<List<Flight>> GetBySearch(int capacity,DateTime date,string from,string to);
+        Task<List<Flight>> GetBySearch(int capacity, DateTime date, string from, string to);
 
     }
 }

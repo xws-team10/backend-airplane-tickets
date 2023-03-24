@@ -12,11 +12,11 @@ namespace FlyMateAPI.Controllers
 
         public FlightsController(FlightsService flightsService) =>
             _flightsService = flightsService;
-        
+
         [HttpGet]
         public async Task<List<Flight>> Get() =>
             await _flightsService.GetAllAsync();
-        
+
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Flight>> Get(string id)
         {
@@ -71,9 +71,9 @@ namespace FlyMateAPI.Controllers
         }
 
         [HttpGet("/getBySearch")]
-        public async Task<ActionResult<List<Flight>>> GetBySearch(DateTime date ,int capacity = 0, string from = "", string to = "")
+        public async Task<ActionResult<List<Flight>>> GetBySearch(DateTime date, int capacity = 0, string from = "", string to = "")
         {
-            var flight = await _flightsService.GetBySearch(capacity,date,from,to);
+            var flight = await _flightsService.GetBySearch(capacity, date, from, to);
 
             if (flight is null)
             {
@@ -83,6 +83,6 @@ namespace FlyMateAPI.Controllers
             return flight;
 
         }
-        
+
     }
 }
