@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using Microsoft.OpenApi.Models;
+using API.Core.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,7 @@ builder.Services.AddAuthentication(x => {
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<FlightsService>();
 builder.Services.AddSingleton<FlightsRepository>();
+builder.Services.AddScoped<TokenService>(); //token service dodat
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

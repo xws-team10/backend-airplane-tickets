@@ -24,11 +24,11 @@ namespace API.Controllers
     public class AccountController : ControllerBase
     {
         public readonly UserManager<User> _userManager;
-        // private readonly TokenService _tokenService;
+         private readonly TokenService _tokenService;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        public AccountController(UserManager<User> userMagager, RoleManager<ApplicationRole> roleManager)
+        public AccountController(UserManager<User> userMagager, RoleManager<ApplicationRole> roleManager, TokenService tokenService)
         {
-            // _tokenService = tokenService;
+             _tokenService = tokenService;
             _userManager = userMagager;
             _roleManager = roleManager;
         }
@@ -57,7 +57,7 @@ namespace API.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = await GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user)
             };
         }
 
@@ -79,7 +79,7 @@ namespace API.Controllers
                 return ValidationProblem();
             }
 
-            await _userManager.AddToRoleAsync(user, "USER");
+            await _userManager.AddToRoleAsync(user, "MEMBER");
 
             return StatusCode(201);
         }
@@ -94,44 +94,9 @@ namespace API.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = await GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user)
             };
-        }
-        
-        private async Task<string> GenerateToken(User user)
-        {
-            var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name, user.UserName),
-                };
-
-            var roles = await _userManager.GetRolesAsync(user);
-            // var roleClaims = roles.Select(x => new Claim(ClaimTypes.Role, x));
-            // claims.AddRange(roleClaims);
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is a secret key and need to be at least 12 characters"));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(30);
-
-            var tokenOptions = new JwtSecurityToken(
-                issuer: "https://localhost:5001",
-                audience: "https://localhost:5001",
-                claims: claims,
-                expires: expires,
-                signingCredentials: creds
-
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-        }
-        
-
-        
+        }        
         
     }
 }

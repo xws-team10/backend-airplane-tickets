@@ -21,27 +21,30 @@ namespace API.Core.Service
         public async Task<string> GenerateToken(User user)
         {
             var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.UserName),
-
-            };
+                {
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Name, user.UserName),
+                };
 
             var roles = await _userManager.GetRolesAsync(user);
+            // var roleClaims = roles.Select(x => new Claim(ClaimTypes.Role, x));
+            // claims.AddRange(roleClaims);
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["this is a secret key and need to be at least 12 characters"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is a secret key and need to be at least 12 characters"));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var expires = DateTime.Now.AddDays(30);
 
             var tokenOptions = new JwtSecurityToken(
-                issuer: null,
-                audience: null,
+                issuer: "https://localhost:5001",
+                audience: "https://localhost:5001",
                 claims: claims,
-                expires: DateTime.Now.AddDays(7),
+                expires: expires,
                 signingCredentials: creds
+
             );
 
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
