@@ -52,9 +52,54 @@ namespace API.Controllers
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
                 return Unauthorized();
+            }            
+
+            return new UserDto
+            {
+                Email = user.Email,
+                Token = await GenerateToken(user)
+            };
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        {
+            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, Address = null };
+
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                return ValidationProblem();
             }
 
-            //all is well if we reach here
+            await _userManager.AddToRoleAsync(user, "USER");
+
+            return StatusCode(201);
+        }
+
+        [Authorize]
+        [HttpGet("currentUser")]
+
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            return new UserDto
+            {
+                Email = user.Email,
+                Token = await GenerateToken(user)
+            };
+        }
+        
+        private async Task<string> GenerateToken(User user)
+        {
             var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, user.Email),
@@ -82,38 +127,8 @@ namespace API.Controllers
 
             );
 
-            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-            return new UserDto
-            {
-                Email = user.Email,
-                Token = token
-            };
+            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
-
-        [HttpPost]
-        [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
-        {
-            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, Address = null };
-
-            var result = await _userManager.CreateAsync(user, registerDto.Password);
-
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(error.Code, error.Description);
-                }
-
-                return ValidationProblem();
-            }
-
-            await _userManager.AddToRoleAsync(user, "USER");
-
-            return StatusCode(201);
-        }
-        
         
 
         
