@@ -28,7 +28,7 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration{
     {
         options.Password.RequireDigit = false;
         options.Password.RequiredLength = 8;
-        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequireNonAlphanumeric = false;
         options.Password.RequireLowercase = false;
 
         //lockout
@@ -40,9 +40,9 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration{
 };
 
 
-builder.Services.ConfigureMongoDbIdentity<ApplicationUser, ApplicationRole, Guid>(mongoDbIdentityConfig)
-    .AddUserManager<UserManager<ApplicationUser>>()
-    .AddSignInManager<SignInManager<ApplicationUser>>()
+builder.Services.ConfigureMongoDbIdentity<User, ApplicationRole, Guid>(mongoDbIdentityConfig)
+    .AddUserManager<UserManager<User>>()
+    .AddSignInManager<SignInManager<User>>()
     .AddRoleManager<RoleManager<ApplicationRole>>()
     .AddDefaultTokenProviders();
 

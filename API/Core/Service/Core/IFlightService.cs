@@ -5,7 +5,7 @@ namespace FlyMateAPI.Core.Service.Core
     public interface IFlightsService
     {
         Task<List<Flight>> GetAllAsync();
-        Task<Flight?> GetByIdAsync(string id);
+        Task<Flight> GetByIdAsync(string id);
         Task CreateAsync(Flight newFlight);
         Task UpdateAsync(string id, Flight updateFlight);
         Task DeleteAsync(string id);
