@@ -11,19 +11,19 @@ namespace API.Controllers
         private readonly BasketService _basketService;
         private readonly FlightsService _flightsService;
 
-        public BasketController(BasketService basketService, FlightsService flightsService) 
-        { 
+        public BasketController(BasketService basketService, FlightsService flightsService)
+        {
             _basketService = basketService;
             _flightsService = flightsService;
-         }
-
-    [HttpGet]
-        public async Task<ActionResult<List<Basket>>> Get() 
+        }
+        /*
+        [HttpGet]
+        public async Task<ActionResult<List<Basket>>> Get()
         {
             return await _basketService.GetAllAsync();
-        }
-
-        [HttpGet (Name = "UserBasket")]
+        }*/
+        
+        [HttpGet(Name = "UserBasket")]
         public async Task<ActionResult<Basket>> GetUserBasket()
         {
             var basket = await _basketService.GetBasket("aa");
