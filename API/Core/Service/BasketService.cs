@@ -12,7 +12,7 @@ namespace FlyMateAPI.Core.Service
         public BasketService(BasketRepository repository) =>
             _repository = repository;
 
-        public async Task CreateAsync(Basket newBasket) => 
+        public async Task CreateAsync(Basket newBasket) =>
             await _repository.CreateAsync(newBasket);
 
         public async Task DeleteAsync(string id) =>
@@ -22,7 +22,7 @@ namespace FlyMateAPI.Core.Service
             await _repository.GetAllAsync();
 
         public async Task<Basket?> GetByIdAsync(string id) =>
-            await _repository.GetByIdAsync(id); 
+            await _repository.GetByIdAsync(id);
 
         public async Task UpdateAsync(string id, Basket updateBasket) =>
             await _repository.UpdateAsync(id, updateBasket);
@@ -30,7 +30,7 @@ namespace FlyMateAPI.Core.Service
         public async Task<Basket?> GetBasket(string buyerId) =>
             await _repository.GetBasketByUser(buyerId);
 
-        public async Task<Basket> CreateBasket() 
+        public async Task<Basket> CreateBasket()
         {
             var buyerId = "aa"; //CurrentUser.Id
 
@@ -51,7 +51,7 @@ namespace FlyMateAPI.Core.Service
             }
 
             var existingTicket = basket.Tickets.FirstOrDefault(ticket => ticket.Id == flight.Id);
-            
+
             if (existingTicket != null)
             {
                 throw new InvalidOperationException("You have already purchased ticket for this flight");

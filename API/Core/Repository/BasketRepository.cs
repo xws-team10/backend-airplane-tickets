@@ -9,7 +9,7 @@ namespace FlyMateAPI.Core.Repository
     {
         private readonly IMongoCollection<Basket> _basketCollection;
 
-        public BasketRepository(IOptions<FlightsStoreDatabaseSettings> flightsStoreDatabaseSettings) 
+        public BasketRepository(IOptions<FlightsStoreDatabaseSettings> flightsStoreDatabaseSettings)
         {
             var mongoClient = new MongoClient(flightsStoreDatabaseSettings.Value.ConnectionString);
             var mongoDatabase = mongoClient.GetDatabase(flightsStoreDatabaseSettings.Value.DatabaseName);
@@ -25,7 +25,7 @@ namespace FlyMateAPI.Core.Repository
         public async Task<List<Basket>> GetAllAsync() =>
             await _basketCollection.Find(_ => true).ToListAsync();
 
-        public async Task<Basket?> GetByIdAsync(string id) => 
+        public async Task<Basket?> GetByIdAsync(string id) =>
             await _basketCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
         public async Task UpdateAsync(string id, Basket updateBasket) =>
