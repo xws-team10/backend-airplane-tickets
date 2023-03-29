@@ -24,11 +24,11 @@ namespace API.Controllers
     public class AccountController : ControllerBase
     {
         public readonly UserManager<User> _userManager;
-         private readonly TokenService _tokenService;
+        private readonly TokenService _tokenService;
         private readonly RoleManager<ApplicationRole> _roleManager;
         public AccountController(UserManager<User> userMagager, RoleManager<ApplicationRole> roleManager, TokenService tokenService)
         {
-             _tokenService = tokenService;
+            _tokenService = tokenService;
             _userManager = userMagager;
             _roleManager = roleManager;
         }
@@ -52,7 +52,7 @@ namespace API.Controllers
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
                 return Unauthorized();
-            }            
+            }
 
             return new UserDto
             {
@@ -96,7 +96,45 @@ namespace API.Controllers
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user)
             };
-        }        
-        
+        }
+
+        [HttpPost]
+        [Route("Authenticate")]
+        public async Task<UserDto> Authenticate(LoginDto loginDto)
+        {
+            User user = await _userManager.FindByNameAsync(loginDto.Username);
+
+
+            if (user == null)
+            {
+                return null;
+            }
+
+
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is a secret key and need to be at least 12 characters"));
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim("UserRole", "member")
+                }),
+                Expires = DateTime.UtcNow.AddHours(3),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is a secret key and need to be at least 12 characters")), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            // user.Token = tokenHandler.WriteToken(token);
+
+
+            return new UserDto            
+            {
+                
+                Email = user.Email,
+                Token = tokenHandler.WriteToken(token),
+            };
+        }
+
     }
 }
