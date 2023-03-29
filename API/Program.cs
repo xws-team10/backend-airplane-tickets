@@ -56,11 +56,11 @@ builder.Services.AddAuthentication(x => {
     x.SaveToken = true;
     x.TokenValidationParameters = new TokenValidationParameters{
         ValidateIssuerSigningKey = true,
-        ValidateIssuer = true,
-        ValidateAudience = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
         ValidateLifetime = true,
-        ValidIssuer = "https://localhost:5001",
-        ValidAudience = "https://localhost:5001",
+        ValidIssuer = null,
+        ValidAudience = null,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is a secret key and need to be at least 12 characters")),
         ClockSkew = TimeSpan.Zero,
     };

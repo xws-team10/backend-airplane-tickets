@@ -36,11 +36,11 @@ namespace API.Core.Service
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is a secret key and need to be at least 12 characters"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(30);
+            var expires = DateTime.Now.AddDays(7);
 
             var tokenOptions = new JwtSecurityToken(
-                issuer: "https://localhost:5001",
-                audience: "https://localhost:5001",
+                issuer: null,
+                audience: null,
                 claims: claims,
                 expires: expires,
                 signingCredentials: creds
