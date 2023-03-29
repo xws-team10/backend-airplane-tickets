@@ -57,7 +57,8 @@ namespace API.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = await _tokenService.GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user),
+                UserRole = user.UserRole
             };
         }
 
@@ -65,7 +66,7 @@ namespace API.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
-            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, Address = null };
+            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, Address = null, UserRole = "MEMBER" };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
@@ -94,7 +95,8 @@ namespace API.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = await _tokenService.GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user),
+                UserRole = user.UserRole
             };
         }
 
