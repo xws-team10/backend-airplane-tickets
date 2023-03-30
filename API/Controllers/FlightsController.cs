@@ -1,6 +1,7 @@
 ﻿using FlyMateAPI.Core.Service;
 using FlyMateAPI.Core.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FlyMateAPI.Controllers
 {
@@ -30,9 +31,13 @@ namespace FlyMateAPI.Controllers
             return flight;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Post(Flight newFlight)
         {
+            if (!newFlight.Validate())
+                return BadRequest();
+
             await _flightsService.CreateAsync(newFlight);
 
             return CreatedAtAction(nameof(Get), new { id = newFlight.Id }, newFlight);
@@ -55,6 +60,7 @@ namespace FlyMateAPI.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -70,7 +76,7 @@ namespace FlyMateAPI.Controllers
             return NoContent();
         }
 
-        [HttpGet("/getBySearch")]
+        [HttpGet("getBySearch")]
         public async Task<ActionResult<List<Flight>>> GetBySearch(DateTime date, int capacity = 0, string from = "", string to = "")
         {
             var flight = await _flightsService.GetBySearch(capacity, date, from, to);
