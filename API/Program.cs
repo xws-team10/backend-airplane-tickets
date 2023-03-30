@@ -20,7 +20,8 @@ builder.Services.Configure<FlightsStoreDatabaseSettings>(
     builder.Configuration.GetSection("FlightsStoreDatabase"));
 
 // add mongoIdentity configuration...
-var mongoDbIdentityConfig = new MongoDbIdentityConfiguration{
+var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
+{
     MongoDbSettings = new MongoDbSettings
     {
         ConnectionString = "mongodb://localhost:27017",
@@ -48,13 +49,16 @@ builder.Services.ConfigureMongoDbIdentity<User, ApplicationRole, Guid>(mongoDbId
     .AddRoleManager<RoleManager<ApplicationRole>>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddAuthentication(x => {
-   x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x => {
+}).AddJwtBearer(x =>
+{
     x.RequireHttpsMetadata = true;
     x.SaveToken = true;
-    x.TokenValidationParameters = new TokenValidationParameters{
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
         ValidateIssuerSigningKey = true,
         ValidateIssuer = false,
         ValidateAudience = false,
@@ -75,7 +79,8 @@ builder.Services.AddScoped<TokenService>(); //token service dodat
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c => {
+builder.Services.AddSwaggerGen(c =>
+{
     var jwtSecurityScheme = new OpenApiSecurityScheme
     {
         BearerFormat = "JWT",
@@ -111,7 +116,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => 
+    app.UseSwaggerUI(c =>
     {
         c.ConfigObject.AdditionalItems.Add("persistAuthorization", "true");
     });

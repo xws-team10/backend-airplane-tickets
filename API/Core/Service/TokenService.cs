@@ -15,7 +15,7 @@ namespace API.Core.Service
         public TokenService(UserManager<User> userManager, IConfiguration config)
         {
             _config = config;
-            _userManager = userManager;            
+            _userManager = userManager;
         }
 
         public async Task<string> GenerateToken(User user)

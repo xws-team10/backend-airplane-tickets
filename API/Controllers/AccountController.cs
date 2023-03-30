@@ -130,9 +130,9 @@ namespace API.Controllers
             // user.Token = tokenHandler.WriteToken(token);
 
 
-            return new UserDto            
+            return new UserDto
             {
-                
+
                 Email = user.Email,
                 Token = tokenHandler.WriteToken(token),
             };
