@@ -24,7 +24,7 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 {
     MongoDbSettings = new MongoDbSettings
     {
-        ConnectionString = "mongodb://localhost:27017",
+        ConnectionString = "mongodb://catalogdb:27017",
         DatabaseName = "FlyMate"
     },
     IdentityOptionsAction = options =>
