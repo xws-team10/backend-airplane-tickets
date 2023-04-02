@@ -22,7 +22,7 @@ namespace API.Controllers
         {
             return await _basketService.GetAllAsync();
         }*/
-        
+
         [HttpGet(Name = "UserBasket")]
         public async Task<ActionResult<Basket>> GetUserBasket()
         {
