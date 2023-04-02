@@ -39,7 +39,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore FlyMate.sln
 
-      - name: Run dotnet format
+      - name: Run dotnet format FlyMate.sln
         run: dotnet format --verify-no-changes --no-restore --verbosity diagnostic
       
       - name: Build
