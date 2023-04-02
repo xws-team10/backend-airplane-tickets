@@ -8,14 +8,20 @@ namespace FlyMateAPI.Core.Service
     {
 
         private readonly TicketRepository _ticketRepository;
+        private readonly FlightsRepository _flightRepository;
 
-        public TicketService(TicketRepository ticketRepository)
+        public TicketService(TicketRepository ticketRepository, FlightsRepository flightsRepository)
         {
             _ticketRepository = ticketRepository;
+            _flightRepository = flightsRepository;
         }
 
         public async Task CreateAsync(Ticket newTicket)
         {
+            Flight flight = await _flightRepository.GetByIdAsync(newTicket.FlightId);
+            flight.SeatsLeft -= 1;
+
+            await _flightRepository.UpdateAsync(newTicket.FlightId, flight);
             await _ticketRepository.CreateAsync(newTicket);
         }
 

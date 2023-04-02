@@ -30,6 +30,19 @@ namespace FlyMateAPI.Controllers
             return flight;
         }
 
+        [HttpGet("/myFlights")]
+        public async Task<ActionResult<List<Flight>>> GetPurchased()
+        {
+            var flight = await _flightsService.GetPurchased();
+
+            if (flight is null)
+            {
+                return NotFound();
+            }
+
+            return flight;
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(Flight newFlight)
         {

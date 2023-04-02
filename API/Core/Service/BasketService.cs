@@ -40,7 +40,7 @@ namespace FlyMateAPI.Core.Service
 
             return basket;
         }
-
+        /*
         public void AddTicket(Flight flight)
         {
             var basket = new Basket();
@@ -58,6 +58,6 @@ namespace FlyMateAPI.Core.Service
             }
 
         }
-
+        */
     }
 }

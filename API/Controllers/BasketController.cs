@@ -32,7 +32,7 @@ namespace API.Controllers
 
             return Ok(basket);
         }
-
+        /*
         [HttpPost]
         public async Task<ActionResult<Basket>> AddTicketToBasket(string ticketId)
         {
@@ -49,7 +49,7 @@ namespace API.Controllers
             return basket;
 
         }
-
+        */
         /*
         [HttpDelete]
         public async Task<ActionResult> RemoveTicketFromBasket(int ticketId)

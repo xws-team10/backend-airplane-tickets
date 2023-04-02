@@ -11,6 +11,9 @@ builder.Services.Configure<FlightsStoreDatabaseSettings>(
 builder.Services.AddSingleton<FlightsService>();
 builder.Services.AddSingleton<FlightsRepository>();
 
+builder.Services.AddSingleton<TicketService>();
+builder.Services.AddSingleton<TicketRepository>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -29,7 +32,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(opt =>
 {
-    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
 });
 
 app.UseHttpsRedirection();
