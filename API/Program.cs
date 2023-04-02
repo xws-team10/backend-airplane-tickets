@@ -76,6 +76,9 @@ builder.Services.AddSingleton<FlightsService>();
 builder.Services.AddSingleton<FlightsRepository>();
 builder.Services.AddScoped<TokenService>(); //token service dodat
 
+builder.Services.AddSingleton<TicketService>();
+builder.Services.AddSingleton<TicketRepository>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

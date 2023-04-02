@@ -2,6 +2,7 @@
 using FlyMateAPI.Core.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace FlyMateAPI.Controllers
 {
@@ -10,9 +11,14 @@ namespace FlyMateAPI.Controllers
     public class FlightsController : ControllerBase
     {
         private readonly FlightsService _flightsService;
+        public readonly UserManager<User> _userManager;
 
-        public FlightsController(FlightsService flightsService) =>
+
+        public FlightsController(FlightsService flightsService, UserManager<User> userMagager)
+        {
             _flightsService = flightsService;
+            _userManager = userMagager;
+        }
 
         [HttpGet]
         public async Task<List<Flight>> Get() =>
@@ -22,6 +28,23 @@ namespace FlyMateAPI.Controllers
         public async Task<ActionResult<Flight>> Get(string id)
         {
             var flight = await _flightsService.GetByIdAsync(id);
+
+            if (flight is null)
+            {
+                return NotFound();
+            }
+
+            return flight;
+        }
+
+
+        [HttpGet("/myFlights")]
+        public async Task<ActionResult<List<Flight>>> GetPurchased()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            string email = user.Email;
+
+            var flight = await _flightsService.GetPurchased(email);
 
             if (flight is null)
             {

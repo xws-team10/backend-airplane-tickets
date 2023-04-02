@@ -1,19 +1,23 @@
 ﻿using FlyMateAPI.Core.Model;
 using FlyMateAPI.Core.Repository;
 using FlyMateAPI.Core.Service.Core;
-using MongoDB.Driver;
-using ZstdSharp.Unsafe;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+
+
+
 
 namespace FlyMateAPI.Core.Service
 {
     public class FlightsService : IFlightsService
     {
         private readonly FlightsRepository _repository;
+        private readonly TicketRepository _ticketRepository;
 
-        public FlightsService(FlightsRepository repository)
+        public FlightsService(FlightsRepository repository, TicketRepository ticketRepository)
         {
             _repository = repository;
+            _ticketRepository = ticketRepository;
         }
 
         public async Task<List<Flight>> GetAllAsync() =>
@@ -30,6 +34,20 @@ namespace FlyMateAPI.Core.Service
 
         public async Task DeleteAsync(string id) =>
             await _repository.DeleteAsync(id);
+
+        public async Task<List<Flight>> GetPurchased(string email)
+        {
+            List<Flight> PurchasedFlight = new List<Flight>();
+
+            foreach (Ticket ticket in await _ticketRepository.GetAllAsync())
+            {
+                if (ticket != null && ticket.UserId.Equals(email))
+                {
+                    PurchasedFlight.Add(await _repository.GetByIdAsync(ticket.FlightId));
+                }
+            }
+            return PurchasedFlight;
+        }
 
         public async Task<List<Flight>> GetBySearch(int capacity, DateTime date, string from, string to)
         {

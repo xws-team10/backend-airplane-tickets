@@ -20,6 +20,5 @@ namespace FlyMateAPI.Core.Model
         {
             Id = id;
         }
-
     }
 }

@@ -1,10 +1,13 @@
-﻿namespace FlyMateAPI.Core.Model
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
+namespace FlyMateAPI.Core.Model
 {
     public class Ticket : Entity
     {
-        public Passenger Passenger { get; set; } = null!;
-        public int Price { get; set; }
-        public int BasketId { get; set; }
-        public DateTime PurchaseDate { get; set; }
+        public string UserId { get; set; } = null!;
+        public string FlightId { get; set; } = null!;
+        //public int Price { get; set; }
+        //public DateTime PurchaseDate { get; set; }
     }
 }
