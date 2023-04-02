@@ -37,10 +37,10 @@ jobs:
         run: nuget restore FlyMate.sln
         
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore FlyMate.sln
 
-      - name: Run dotnet format
-        run: dotnet format --verify-no-changes --no-restore --verbosity diagnostic
+      - name: Run dotnet format FlyMate.sln
+        run: dotnet format FlyMate.sln --verify-no-changes --no-restore --verbosity diagnostic
       
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build FlyMate.sln --no-restore

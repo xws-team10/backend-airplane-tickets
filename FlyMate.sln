@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlyMateAPI", "API\FlyMateAPI.csproj", "{28A95D9B-3551-4A0D-A9D3-99834ED9D509}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8A2DF33D-8AE5-4749-8454-F374D999A53C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{28A95D9B-3551-4A0D-A9D3-99834ED9D509}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28A95D9B-3551-4A0D-A9D3-99834ED9D509}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28A95D9B-3551-4A0D-A9D3-99834ED9D509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2DF33D-8AE5-4749-8454-F374D999A53C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2DF33D-8AE5-4749-8454-F374D999A53C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2DF33D-8AE5-4749-8454-F374D999A53C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2DF33D-8AE5-4749-8454-F374D999A53C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
