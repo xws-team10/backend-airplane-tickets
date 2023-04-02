@@ -15,5 +15,10 @@ namespace FlyMateAPI.Core.Model
         public int Capacity { get; set; }
         public int Price { get; set; }
         public int SeatsLeft { get; set; }
+
+        public bool Validate()
+        {
+            return (Capacity > 0 && Price > 0 && SeatsLeft >= 0 && SeatsLeft <= Capacity && DepartureDateTime <= ArrivalDateTime);
+        }
     }
 }

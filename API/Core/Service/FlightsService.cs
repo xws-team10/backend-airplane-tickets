@@ -21,7 +21,7 @@ namespace FlyMateAPI.Core.Service
         public async Task<List<Flight>> GetAllAsync() =>
             await _repository.GetAllAsync();
 
-        public async Task<Flight?> GetByIdAsync(string id) =>
+        public async Task<Flight> GetByIdAsync(string id) =>
             await _repository.GetByIdAsync(id);
 
         public async Task CreateAsync(Flight newFlight) =>

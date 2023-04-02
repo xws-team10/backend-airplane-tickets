@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  catalogdb:
+    container_name: catalogdb
+    restart: always
+    ports:
+      - "27017:27017"
+   # command: ["mongod", "--port", "27017"]
+
+  flymateapi:
+    container_name: flymateapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "FlightsStoreDatabase:ConnectionString=mongodb://catalogdb:27017"
+    depends_on:
+      - catalogdb
+    ports:
+      - "5000:80"
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: catalogdb
+    depends_on:
+      - catalogdb
